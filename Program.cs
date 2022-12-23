@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            while (User.userLogedIn == 999999)
+            while (User.userLogedIn == -1)
             {
                 User.LoginUser();
             }

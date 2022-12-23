@@ -8,7 +8,7 @@
             while (menu)
             {
                 Console.Clear();
-                Console.WriteLine("Welcome to the bank, {0}", User.activeUsername);
+                Console.WriteLine("Welcome, {0}", User.activeUsername);
                 Console.WriteLine("What whould you like to do?");
                 Console.WriteLine("---------------------------");
                 Console.WriteLine("1. Accounts/Saldo");
@@ -32,7 +32,12 @@
                         WithdrawMenu();
                         break;
                     case "e":
-                        menu = false;
+                        Console.Clear();
+                        Console.WriteLine("\nYou are now logged out!");
+                        Console.WriteLine("Press Enter to login again...");
+                        Console.ReadLine();
+                        User.userLogedIn = -1;
+                        User.LoginUser();
                         break;
                     default:
                         Console.WriteLine("You did not enter one of the options");
@@ -48,10 +53,10 @@
             while (menu)
             {
                 Console.Clear();
-                Console.WriteLine("Accounts & Saldo");
+                Console.WriteLine("Accounts & Balance");
                 Console.WriteLine("What whould you like to do?");
                 Console.WriteLine("---------------------------");
-                Console.WriteLine("1. View saldo");
+                Console.WriteLine("1. View Balance");
                 Console.WriteLine("E. Exit");
                 Console.WriteLine("---------------------------");
                 Console.Write("Enter a choice: ");
@@ -61,7 +66,7 @@
                 switch (choice)
                 {
                     case "1":
-                        User.PrintSaldo();
+                        User.PrintAccount();
                         break;
                     case "e":
                         menu = false;

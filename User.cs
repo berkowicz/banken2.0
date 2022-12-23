@@ -3,11 +3,10 @@
     public class User
     {
         #region //User info
-        public static int userLogedIn = 999999;
+        public static int userLogedIn = -1;
         public static string activeUsername;
 
         private static string[] username = { "Daniel", "Bengan", "Michelle", "David", "Lars" };
-        //public static string[] usernameCopy = username;
         private static string[] pin = { "1337", "2222", "3333", "4444", "5555" };
 
         private static string[][] account =
@@ -32,6 +31,7 @@
         #region //LoginUser()
         public static void LoginUser()
         {
+            Console.Clear();
             int attempts = 3;
             Console.WriteLine("Login");
             for (int i = 0; i <= 2; i++)
@@ -72,7 +72,7 @@
         }
         #endregion
 
-        public static void PrintSaldo()
+        public static void PrintAccount()
         {
             Console.Clear();
             for (int i = 0; i < account[userLogedIn].Length; i++)
@@ -116,7 +116,7 @@
                     {
                         balance[userLogedIn][accFrom] -= amount;
                         balance[userLogedIn][accTo] += amount;
-                        Console.WriteLine("\nComplete!\nNew saldo");
+                        Console.WriteLine("\nComplete!\nNew balance");
                         Console.WriteLine("{0}: {1}", account[userLogedIn][accFrom], balance[userLogedIn][accFrom]);
                         Console.WriteLine("{0}: {1}", account[userLogedIn][accTo], balance[userLogedIn][accTo]);
                         Console.WriteLine("Press Enter to continue...");
@@ -150,22 +150,38 @@
             }
             else
             {
-                while (true)
+
+                Console.WriteLine("Enter ammount to withdraw: ");
+                bool transfer = Decimal.TryParse(Console.ReadLine(), out decimal amount);
+                if (amount > balance[userLogedIn][accFrom])
                 {
-                    Console.WriteLine("Enter ammount to withdraw: ");
-                    bool transfer = Decimal.TryParse(Console.ReadLine(), out decimal amount);
-                    if (amount > balance[userLogedIn][accFrom])
+                    Console.WriteLine("You can't withdraw more then your account contains");
+                }
+                else if (transfer)
+                {
+                    int attempts = 3;
+                    while (true)
                     {
-                        Console.WriteLine("You can't withdraw more then your account contains");
-                    }
-                    else if (transfer)
-                    {
+                        if (attempts == 0)
+                        {
+                            Console.WriteLine("\nToo many failed attempts.");
+                            Console.WriteLine("Press Enter to continue...");
+                            Console.ReadLine();
+                            break;
+                        }
                         Console.WriteLine("Enter your pin to complete: ");
                         string withdrawPin = Console.ReadLine();
-                        if (withdrawPin.Equals(pin[userLogedIn]))
+
+                        if (!withdrawPin.Equals(pin[userLogedIn]))
+                        {
+                            --attempts;
+                            Console.WriteLine("Verification failed");
+                            Console.WriteLine("{0} attemps left\n", attempts);
+                        }
+                        else if (withdrawPin.Equals(pin[userLogedIn]))
                         {
                             balance[userLogedIn][accFrom] -= amount;
-                            Console.WriteLine("\nComplete!\nNew saldo");
+                            Console.WriteLine("\nComplete!\nNew balance");
                             Console.WriteLine("{0}: {1}", account[userLogedIn][accFrom], balance[userLogedIn][accFrom]);
                             Console.WriteLine("Press Enter to continue...");
                             Console.ReadLine();
@@ -177,11 +193,12 @@
                         }
 
                     }
-                    else
-                    {
-                        Console.WriteLine("You didn't enter a correct input\nTry again");
-                    }
                 }
+                else
+                {
+                    Console.WriteLine("You didn't enter a correct input\nTry again");
+                }
+
             }
         }
     }
