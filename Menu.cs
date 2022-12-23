@@ -2,19 +2,19 @@
 {
     public class Menu
     {
+        #region //MainMenu()
         public static void MainMenu()
         {
-            bool menu = true;
-            while (menu)
+            while (true)
             {
                 Console.Clear();
                 Console.WriteLine("Welcome, {0}", User.activeUsername);
                 Console.WriteLine("What whould you like to do?");
                 Console.WriteLine("---------------------------");
-                Console.WriteLine("1. Accounts/Saldo");
+                Console.WriteLine("1. Accounts/Balance");
                 Console.WriteLine("2. Transfer");
                 Console.WriteLine("3. Withdraw");
-                Console.WriteLine("E. Exit");
+                Console.WriteLine("E. Logout");
                 Console.WriteLine("---------------------------");
                 Console.Write("Enter a choice: ");
 
@@ -31,7 +31,7 @@
                     case "3":
                         WithdrawMenu();
                         break;
-                    case "e":
+                    case "e": //Log out user and initialize login function
                         Console.Clear();
                         Console.WriteLine("\nYou are now logged out!");
                         Console.WriteLine("Press Enter to login again...");
@@ -46,7 +46,9 @@
                 }
             }
         }
+        #endregion
 
+        #region //AccpountsMenu()
         public static void AccountsMenu()
         {
             bool menu = true;
@@ -78,7 +80,9 @@
                 }
             }
         }
+        #endregion
 
+        #region //TransferMenu()
         public static void TransferMenu()
         {
             bool menu = true;
@@ -110,7 +114,9 @@
                 }
             }
         }
+        #endregion
 
+        #region //WithdrawMenu()
         public static void WithdrawMenu()
         {
             bool menu = true;
@@ -142,5 +148,6 @@
                 }
             }
         }
+        #endregion
     }
 }
