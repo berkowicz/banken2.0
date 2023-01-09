@@ -64,10 +64,9 @@
                     }
                 }
                 //Exits program if 3 failed attempts
-                if (i == 2)
+                if (attempts == 0)//(i == 2)
                 {
-                    Console.WriteLine("\nToo many failed attempts. Program will now Exit");
-                    Environment.Exit(0);
+                    Exit();
                 }
             }
         }
@@ -82,8 +81,7 @@
             {
                 Console.WriteLine("{0}: {1}", account[userLogedIn][i], balance[userLogedIn][i]);
             }
-            Console.WriteLine("Press Enter to continue...");
-            Console.ReadLine();
+            EnterToContinue();
         }
         #endregion
 
@@ -128,8 +126,7 @@
                         Console.WriteLine("\nComplete!\nNew balance");
                         Console.WriteLine("{0}: {1}", account[userLogedIn][accFrom], balance[userLogedIn][accFrom]);
                         Console.WriteLine("{0}: {1}", account[userLogedIn][accTo], balance[userLogedIn][accTo]);
-                        Console.WriteLine("Press Enter to continue...");
-                        Console.ReadLine();
+                        EnterToContinue();
                         break;
                     }
                     //Catch faulty input
@@ -169,6 +166,7 @@
                 if (amount > balance[userLogedIn][accFrom])
                 {
                     Console.WriteLine("You can't withdraw more then your account contains");
+                    EnterToContinue();
                 }
                 //Money is avalible & input got parsed
                 else if (transfer)
@@ -179,10 +177,7 @@
                         //Catches 3 failed attemps
                         if (attempts == 0)
                         {
-                            Console.WriteLine("\nToo many failed attempts.");
-                            Console.WriteLine("Press Enter to continue...");
-                            Console.ReadLine();
-                            break;
+                            Exit();
                         }
                         Console.WriteLine("Enter your pin to complete: ");
                         string withdrawPin = Console.ReadLine();
@@ -200,8 +195,7 @@
                             balance[userLogedIn][accFrom] -= amount;
                             Console.WriteLine("\nComplete!\nNew balance");
                             Console.WriteLine("{0}: {1}", account[userLogedIn][accFrom], balance[userLogedIn][accFrom]);
-                            Console.WriteLine("Press Enter to continue...");
-                            Console.ReadLine();
+                            EnterToContinue();
                             break;
                         }
                         //Catch faulty input
@@ -221,5 +215,15 @@
             }
         }
         #endregion
+        public static void Exit()
+        {
+            Console.WriteLine("\nToo many failed attempts. Program will now Exit");
+            Environment.Exit(0);
+        }
+        public static void EnterToContinue()
+        {
+            Console.WriteLine("Press Enter to continue...");
+            Console.ReadLine();
+        }
     }
 }
