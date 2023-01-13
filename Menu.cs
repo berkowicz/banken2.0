@@ -1,9 +1,8 @@
 ﻿namespace banken3
 {
-    public class Menu
+    internal class Menu
     {
-        #region //MainMenu()
-        public static void MainMenu()
+        internal static void MainMenu()
         {
             while (true)
             {
@@ -46,10 +45,8 @@
                 }
             }
         }
-        #endregion
 
-        #region //AccpountsMenu()
-        public static void AccountsMenu()
+        internal static void AccountsMenu()
         {
             bool menu = true;
             while (menu)
@@ -80,10 +77,8 @@
                 }
             }
         }
-        #endregion
 
-        #region //TransferMenu()
-        public static void TransferMenu()
+        internal static void TransferMenu()
         {
             bool menu = true;
             while (menu)
@@ -114,10 +109,8 @@
                 }
             }
         }
-        #endregion
 
-        #region //WithdrawMenu()
-        public static void WithdrawMenu()
+        internal static void WithdrawMenu()
         {
             bool menu = true;
             while (menu)
@@ -148,6 +141,5 @@
                 }
             }
         }
-        #endregion
     }
 }
